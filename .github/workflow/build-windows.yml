@@ -1,0 +1,23 @@
+name: Build Windows EXE
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compile C++
+        run: g++ -std=c++17 -O2 main.cpp -o input_nama_sekolah.exe
+
+      - name: Upload EXE
+        uses: actions/upload-artifact@v4
+        with:
+          name: input-nama-sekolah-windows
+          path: input_nama_sekolah.exe
